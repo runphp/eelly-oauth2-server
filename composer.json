@@ -20,7 +20,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Eelly\\OAuth2\\Server": "src"
+			"Eelly\\OAuth2\\Server\\": "src"
 		}
 	}
 }
