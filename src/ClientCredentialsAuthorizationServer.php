@@ -32,6 +32,6 @@ class ClientCredentialsAuthorizationServer extends LeagueAuthorizationServer
         $scopeRepository = new ScopeRepository(); // instance of ScopeRepositoryInterface
         $accessTokenRepository = new AccessTokenRepository(); // instance of AccessTokenRepositoryInterface
         parent::__construct($clientRepository, $accessTokenRepository, $scopeRepository, $cryptKeyPath.'/private.key', $cryptKeyPath.'/public.key');
-        $this->enableGrantType(new ClientCredentialsGrant(), new \DateInterval('PT1H'));
+        $this->enableGrantType(new ClientCredentialsGrant(), new \DateInterval('P1M'));
     }
 }
