@@ -65,14 +65,14 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
     public function getReservedAttributes()
     {
         $reserved = [
-                '_connection' => true,
+                '_connection'         => true,
                 '_dependencyInjector' => true,
-                '_source' => true,
-                '_operationMade' => true,
-                '_errorMessages' => true,
-                '_dirtyState' => true,
-                '_modelsManager' => true,
-                '_skipped' => true,
+                '_source'             => true,
+                '_operationMade'      => true,
+                '_errorMessages'      => true,
+                '_dirtyState'         => true,
+                '_modelsManager'      => true,
+                '_skipped'            => true,
             ];
 
         return $reserved;
@@ -230,7 +230,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
         /**
          * Get the Collection.
          *
-         * @var AdapterCollection $collection
+         * @var AdapterCollection
          */
         $collection = $connection->selectCollection($source);
 
@@ -442,7 +442,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
         }
 
         /**
-         * @var \Phalcon\Db\Adapter\MongoDB\Collection $mongoCollection
+         * @var \Phalcon\Db\Adapter\MongoDB\Collection
          */
         $mongoCollection = $connection->selectCollection($source);
 
