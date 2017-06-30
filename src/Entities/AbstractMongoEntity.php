@@ -230,7 +230,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
         /**
          * Get the Collection.
          *
-         * @var AdapterCollection $collection
+         * @var AdapterCollection
          */
         $collection = $connection->selectCollection($source);
 
@@ -442,7 +442,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
         }
 
         /**
-         * @var \Phalcon\Db\Adapter\MongoDB\Collection $mongoCollection
+         * @var \Phalcon\Db\Adapter\MongoDB\Collection
          */
         $mongoCollection = $connection->selectCollection($source);
 
