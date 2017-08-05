@@ -54,13 +54,6 @@ class AuthorizationServerMiddleware
             $psr7Response = $exception->generateHttpResponse($psr7Response);
 
             return $this->convertResponse($psr7Response, $response);
-            // @codeCoverageIgnoreStart
-        } catch (\Exception $exception) {
-            $psr7Response = (new OAuthServerException($exception->getMessage(), 0, 'unknown_error', 500))
-                ->generateHttpResponse($psr7Response);
-
-            return $this->convertResponse($psr7Response, $response);
-            // @codeCoverageIgnoreEnd
         }
 
         // Pass the request and response on to the next responder in the chain
