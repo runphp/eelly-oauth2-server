@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Eelly\OAuth2\Server\Repositories;
 
+use Eelly\OAuth2\Server\Entities\ScopeEntity;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 

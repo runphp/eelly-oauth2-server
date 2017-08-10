@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace Eelly\OAuth2\Server\Entities;
 
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
+use League\OAuth2\Server\Entities\Traits\EntityTrait;
 
 class ScopeEntity extends AbstractMysqlEntity implements ScopeEntityInterface
 {
+    use EntityTrait;
+
     /**
      * {@inheritdoc}
      *
@@ -27,15 +30,7 @@ class ScopeEntity extends AbstractMysqlEntity implements ScopeEntityInterface
         return 'oauth_permission';
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdentifier()
-    {
-        return $this->hash_name;
-    }
-
-    public function jsonSerialize(): void
+    public function jsonSerialize()
     {
         return $this->getIdentifier();
     }

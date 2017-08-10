@@ -15,6 +15,7 @@ namespace Eelly\OAuth2\Server\Middleware;
 
 use Eelly\OAuth2\Server\ClientCredentialsAuthorizationServer;
 use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
+use Eelly\OAuth2\Server\PasswordAuthorizationServer;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
@@ -82,6 +83,9 @@ class AuthorizationServerMiddleware
         switch ($grantType) {
             case 'client_credentials':
                 $server = new ClientCredentialsAuthorizationServer($this->cryptKey, $this->encryptionKey);
+                break;
+            case 'password':
+                $server = new PasswordAuthorizationServer($this->cryptKey, $this->encryptionKey);
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();
