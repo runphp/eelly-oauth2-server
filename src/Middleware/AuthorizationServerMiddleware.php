@@ -16,6 +16,7 @@ use Eelly\OAuth2\Server\ClientCredentialsAuthorizationServer;
 use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
+use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Phalcon\Http\RequestInterface;
 use Phalcon\Http\ResponseInterface;
@@ -27,11 +28,26 @@ class AuthorizationServerMiddleware
 {
     use ResponseTrait;
 
-    private $cryptKeyPath;
+    /**
+     * @var CryptKey
+     */
+    private $cryptKey;
 
-    public function __construct(string $cryptKeyPath)
+    /**
+     * @var string
+     */
+    private $encryptionKey;
+
+    /**
+     * AuthorizationServerMiddleware constructor.
+     *
+     * @param CryptKey $cryptKey
+     * @param string   $encryptionKey
+     */
+    public function __construct(CryptKey $cryptKey, string $encryptionKey)
     {
-        $this->cryptKeyPath = $cryptKeyPath;
+        $this->cryptKey = $cryptKey;
+        $this->encryptionKey = $encryptionKey;
     }
 
     /**
@@ -64,7 +80,7 @@ class AuthorizationServerMiddleware
     {
         switch ($grantType) {
             case 'client_credentials':
-                $server = new ClientCredentialsAuthorizationServer($this->cryptKeyPath);
+                $server = new ClientCredentialsAuthorizationServer($this->cryptKey, $this->encryptionKey);
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();
