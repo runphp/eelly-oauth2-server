@@ -16,6 +16,7 @@ use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
 use Eelly\OAuth2\Server\ResourceServer;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
+use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Phalcon\Http\RequestInterface;
 use Phalcon\Http\ResponseInterface;
@@ -24,11 +25,19 @@ class ResourceServerMiddleware
 {
     use ResponseTrait;
 
-    private $cryptKeyPath;
+    /**
+     * @var CryptKey
+     */
+    private $cryptKey;
 
-    public function __construct(string $cryptKeyPath)
+    /**
+     * ResourceServerMiddleware constructor.
+     *
+     * @param CryptKey $cryptKey
+     */
+    public function __construct($cryptKey)
     {
-        $this->cryptKeyPath = $cryptKeyPath;
+        $this->cryptKey = $cryptKey;
     }
 
     /**
@@ -42,7 +51,7 @@ class ResourceServerMiddleware
     {
         $psr7Response = new Response();
         try {
-            $server = new ResourceServer($this->cryptKeyPath);
+            $server = new ResourceServer($this->cryptKey);
             $psr7Request = ServerRequest::fromGlobals();
             $psr7Request = $server->validateAuthenticatedRequest($psr7Request);
         } catch (OAuthServerException $exception) {

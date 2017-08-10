@@ -18,10 +18,12 @@ use League\OAuth2\Server\ResourceServer as LeagueResourceServer;
 class ResourceServer extends LeagueResourceServer
 {
     /**
-     * @param string $cryptKeyPath 秘钥目录
+     * ResourceServer constructor.
+     *
+     * @param \League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface $cryptKey
      */
-    public function __construct($cryptKeyPath)
+    public function __construct($cryptKey)
     {
-        parent::__construct(new AccessTokenRepository(), $cryptKeyPath.'/public.key');
+        parent::__construct(new AccessTokenRepository(), $cryptKey);
     }
 }
