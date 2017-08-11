@@ -28,15 +28,15 @@ class ClientCredentialsAuthorizationServer extends LeagueAuthorizationServer
     /**
      * ClientCredentialsAuthorizationServer constructor.
      *
-     * @param CryptKey $cryptKey
+     * @param CryptKey $privateKey
      * @param string   $encryptionKey
      */
-    public function __construct(CryptKey $cryptKey, string $encryptionKey)
+    public function __construct(CryptKey $privateKey, string $encryptionKey)
     {
         $clientRepository = new ClientRepository(); // instance of ClientRepositoryInterface
         $scopeRepository = new ScopeRepository(); // instance of ScopeRepositoryInterface
         $accessTokenRepository = new AccessTokenRepository(); // instance of AccessTokenRepositoryInterface
-        parent::__construct($clientRepository, $accessTokenRepository, $scopeRepository, $cryptKey, $encryptionKey);
+        parent::__construct($clientRepository, $accessTokenRepository, $scopeRepository, $privateKey, $encryptionKey);
         $this->enableGrantType(new ClientCredentialsGrant(), new \DateInterval('P1M'));
     }
 }

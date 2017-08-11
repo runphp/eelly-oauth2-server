@@ -33,7 +33,7 @@ class AuthorizationServerMiddleware
     /**
      * @var CryptKey
      */
-    private $cryptKey;
+    private $privateKey;
 
     /**
      * @var string
@@ -43,12 +43,12 @@ class AuthorizationServerMiddleware
     /**
      * AuthorizationServerMiddleware constructor.
      *
-     * @param CryptKey $cryptKey
+     * @param CryptKey $privateKey
      * @param string   $encryptionKey
      */
-    public function __construct(CryptKey $cryptKey, string $encryptionKey)
+    public function __construct(CryptKey $privateKey, string $encryptionKey)
     {
-        $this->cryptKey = $cryptKey;
+        $this->privateKey = $privateKey;
         $this->encryptionKey = $encryptionKey;
     }
 
@@ -82,10 +82,10 @@ class AuthorizationServerMiddleware
     {
         switch ($grantType) {
             case 'client_credentials':
-                $server = new ClientCredentialsAuthorizationServer($this->cryptKey, $this->encryptionKey);
+                $server = new ClientCredentialsAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             case 'password':
-                $server = new PasswordAuthorizationServer($this->cryptKey, $this->encryptionKey);
+                $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();
