@@ -28,7 +28,7 @@ use League\OAuth2\Server\Grant\PasswordGrant;
 class PasswordAuthorizationServer extends LeagueAuthorizationServer
 {
     /**
-     * ClientCredentialsAuthorizationServer constructor.
+     * PasswordAuthorizationServer constructor.
      *
      * @param CryptKey $privateKey
      * @param string   $encryptionKey

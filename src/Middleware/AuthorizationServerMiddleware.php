@@ -78,7 +78,7 @@ class AuthorizationServerMiddleware
         return $next($request, $response);
     }
 
-    private function getAuthorizationServer($grantType)
+    private function getAuthorizationServer(string $grantType)
     {
         switch ($grantType) {
             case 'client_credentials':
