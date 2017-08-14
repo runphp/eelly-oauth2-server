@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Eelly\OAuth2\Server\Middleware;
 
+use Eelly\Di\InjectionAwareInterface;
 use Eelly\OAuth2\Server\ClientCredentialsAuthorizationServer;
 use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
 use Eelly\OAuth2\Server\PasswordAuthorizationServer;
@@ -20,15 +21,18 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Phalcon\DiInterface as Di;
 use Phalcon\Http\RequestInterface;
 use Phalcon\Http\ResponseInterface;
 
 /**
  * @author hehui<hehui@eelly.net>
  */
-class AuthorizationServerMiddleware
+class AuthorizationServerMiddleware implements InjectionAwareInterface
 {
     use ResponseTrait;
+
+    private $di;
 
     /**
      * @var CryptKey
@@ -78,6 +82,22 @@ class AuthorizationServerMiddleware
         return $next($request, $response);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setDI(Di $di): void
+    {
+        $this->di = $di;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDI()
+    {
+        return $this->di;
+    }
+
     private function getAuthorizationServer(string $grantType)
     {
         switch ($grantType) {
@@ -85,7 +105,7 @@ class AuthorizationServerMiddleware
                 $server = new ClientCredentialsAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             case 'password':
-                $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey);
+                $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey, new \Eelly\SDK\User\Api\User());
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();

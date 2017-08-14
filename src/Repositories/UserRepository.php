@@ -17,8 +17,24 @@ use Eelly\OAuth2\Server\Entities\UserEntity;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 
+/**
+ * Class UserRepository.
+ */
 class UserRepository implements UserRepositoryInterface
 {
+    /**
+     * @var \Eelly\SDK\User\Api\User
+     */
+    private $user;
+
+    /**
+     * UserRepository constructor.
+     */
+    public function __construct(\Eelly\SDK\User\Api\User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -28,8 +44,10 @@ class UserRepository implements UserRepositoryInterface
         $grantType,
         ClientEntityInterface $clientEntity
     ) {
-        return new UserEntity();
-        // TODO: Implement getUserEntityByUserCredentials() method.
-        return;
+        $user = $this->user->getUserByPassword($username, $password);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->userId);
+
+        return $entity;
     }
 }

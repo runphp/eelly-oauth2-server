@@ -17,7 +17,23 @@ use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
 
-class RefreshTokenEntity implements RefreshTokenEntityInterface
+class RefreshTokenEntity extends AbstractMongoEntity implements RefreshTokenEntityInterface
 {
     use RefreshTokenTrait, EntityTrait;
+
+    public function initialize(): void
+    {
+        $this->useImplicitObjectIds(true);
+        $this->selectDb('oauth');
+    }
+
+    public function beforeSave(): void
+    {
+        $this->expiryDateTime = new \MongoDB\BSON\UTCDateTime(floor($this->expiryDateTime->format('U.u') * 1000));
+    }
+
+    public function getExpiryDateTime()
+    {
+        return $this->expiryDateTime->toDateTime();
+    }
 }

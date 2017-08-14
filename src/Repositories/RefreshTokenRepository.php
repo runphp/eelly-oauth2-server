@@ -32,7 +32,7 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void
     {
-        // TODO: Implement persistNewRefreshToken() method.
+        $refreshTokenEntity->save();
     }
 
     /**

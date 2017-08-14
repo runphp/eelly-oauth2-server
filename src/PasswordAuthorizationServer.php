@@ -30,16 +30,17 @@ class PasswordAuthorizationServer extends LeagueAuthorizationServer
     /**
      * PasswordAuthorizationServer constructor.
      *
-     * @param CryptKey $privateKey
-     * @param string   $encryptionKey
+     * @param CryptKey                 $privateKey
+     * @param string                   $encryptionKey
+     * @param \Eelly\SDK\User\Api\User $user
      */
-    public function __construct(CryptKey $privateKey, string $encryptionKey)
+    public function __construct(CryptKey $privateKey, string $encryptionKey, \Eelly\SDK\User\Api\User $user)
     {
         $clientRepository = new ClientRepository(); // instance of ClientRepositoryInterface
         $scopeRepository = new ScopeRepository(); // instance of ScopeRepositoryInterface
         $accessTokenRepository = new AccessTokenRepository(); // instance of AccessTokenRepositoryInterface
         parent::__construct($clientRepository, $accessTokenRepository, $scopeRepository, $privateKey, $encryptionKey);
-        $userRepository = new UserRepository(); // instance of UserRepositoryInterface
+        $userRepository = new UserRepository($user); // instance of UserRepositoryInterface
         $refreshTokenRepository = new RefreshTokenRepository(); // instance of RefreshTokenRepositoryInterface
 
         $grant = new PasswordGrant($userRepository, $refreshTokenRepository);
