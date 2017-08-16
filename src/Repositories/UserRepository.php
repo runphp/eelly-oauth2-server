@@ -46,7 +46,7 @@ class UserRepository implements UserRepositoryInterface
     ) {
         $user = $this->user->getUserByPassword($username, $password);
         $entity = new UserEntity();
-        $entity->setIdentifier($user->userId);
+        $entity->setIdentifier($user->uid);
 
         return $entity;
     }
