@@ -36,7 +36,7 @@ class ClientRepository implements ClientRepositoryInterface
         //dd(password_hash('abc123', PASSWORD_BCRYPT));
         if ($mustValidateSecret
             && (bool) $client->is_encrypt
-            && false === password_verify($clientSecret, $client->client_secret)
+            && false === password_verify((string) $clientSecret, $client->client_secret)
             ) {
             return;
         }

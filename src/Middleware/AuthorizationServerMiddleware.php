@@ -98,8 +98,18 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
         return $this->di;
     }
 
-    private function getAuthorizationServer(string $grantType)
+    /**
+     * @param string|null $grantType
+     *
+     * @throws OAuthServerException
+     *
+     * @return ClientCredentialsAuthorizationServer|PasswordAuthorizationServer
+     */
+    private function getAuthorizationServer(string $grantType = null)
     {
+        if (null === $grantType) {
+            throw OAuthServerException::invalidRequest('grant_type');
+        }
         switch ($grantType) {
             case 'client_credentials':
                 $server = new ClientCredentialsAuthorizationServer($this->privateKey, $this->encryptionKey);
