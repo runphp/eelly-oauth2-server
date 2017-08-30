@@ -66,6 +66,7 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $psr7Response = new Response();
+
         try {
             $grantType = $request->getPost('grant_type');
             $server = $this->getAuthorizationServer($grantType);

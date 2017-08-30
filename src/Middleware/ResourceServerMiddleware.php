@@ -51,6 +51,7 @@ class ResourceServerMiddleware
     public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $psr7Response = new Response();
+
         try {
             $server = new ResourceServer($this->cryptKey);
             $psr7Request = ServerRequest::fromGlobals();
