@@ -40,7 +40,11 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function revokeRefreshToken($tokenId): void
     {
-        // TODO: Implement revokeRefreshToken() method.
+        $refreshTokenEntity = RefreshTokenEntity::findFirst([['identifier'=>$tokenId]]);
+        if (false !== $refreshTokenEntity) {
+            $refreshTokenEntity->setRevoked(true);
+            $refreshTokenEntity->save();
+        }
     }
 
     /**
@@ -48,6 +52,12 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function isRefreshTokenRevoked($tokenId)
     {
-        return false;
+        $refreshTokenEntity = RefreshTokenEntity::findFirst([['identifier'=>$tokenId]]);
+        $isRefreshTokenRevoked = true;
+        if (false !== $refreshTokenEntity) {
+            $isRefreshTokenRevoked = $refreshTokenEntity->isRevoked();
+        }
+
+        return $isRefreshTokenRevoked;
     }
 }

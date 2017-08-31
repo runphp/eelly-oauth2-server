@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Eelly\OAuth2\Server\Entities;
 
+use Eelly\OAuth2\Server\Entities\Traits\RevokedTrait;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
+use MongoDB\BSON\UTCDateTime;
 
 class RefreshTokenEntity extends AbstractMongoEntity implements RefreshTokenEntityInterface
 {
-    use RefreshTokenTrait, EntityTrait;
+    use RefreshTokenTrait, EntityTrait, RevokedTrait;
 
     public function initialize(): void
     {
@@ -29,7 +31,9 @@ class RefreshTokenEntity extends AbstractMongoEntity implements RefreshTokenEnti
 
     public function beforeSave(): void
     {
-        $this->expiryDateTime = new \MongoDB\BSON\UTCDateTime(floor($this->expiryDateTime->format('U.u') * 1000));
+        if (!$this->expiryDateTime instanceof UTCDateTime) {
+            $this->expiryDateTime = new UTCDateTime(floor($this->expiryDateTime->format('U.u') * 1000));
+        }
     }
 
     public function getExpiryDateTime()

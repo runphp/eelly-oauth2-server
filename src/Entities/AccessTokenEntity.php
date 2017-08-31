@@ -13,17 +13,19 @@ declare(strict_types=1);
 
 namespace Eelly\OAuth2\Server\Entities;
 
+use Eelly\OAuth2\Server\Entities\Traits\RevokedTrait;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\AccessTokenTrait;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
+use MongoDB\BSON\UTCDateTime;
 
 /**
  * @author hehui<hehui@eelly.net>
  */
 class AccessTokenEntity extends AbstractMongoEntity implements AccessTokenEntityInterface
 {
-    use AccessTokenTrait, EntityTrait, TokenEntityTrait;
+    use AccessTokenTrait, EntityTrait, TokenEntityTrait, RevokedTrait;
 
     protected $client_id;
 
@@ -35,8 +37,12 @@ class AccessTokenEntity extends AbstractMongoEntity implements AccessTokenEntity
 
     public function beforeSave(): void
     {
-        $this->client_id = $this->client->getIdentifier();
-        $this->expiryDateTime = new \MongoDB\BSON\UTCDateTime(floor($this->expiryDateTime->format('U.u') * 1000));
+        if (null != $this->client) {
+            $this->client_id = $this->client->getIdentifier();
+        }
+        if (!$this->expiryDateTime instanceof UTCDateTime) {
+            $this->expiryDateTime = new UTCDateTime(floor($this->expiryDateTime->format('U.u') * 1000));
+        }
     }
 
     /**

@@ -177,7 +177,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
      *
      * @param array|null $parameters
      *
-     * @return array
+     * @return static
      */
     public static function findFirst(array $parameters = null)
     {
