@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server;
+namespace Eelly\OAuth2\Server\AuthorizationServer;
 
 use Eelly\OAuth2\Server\Repositories\AccessTokenRepository;
 use Eelly\OAuth2\Server\Repositories\ClientRepository;

@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Eelly\OAuth2\Server\Middleware;
 
 use Eelly\Di\InjectionAwareInterface;
-use Eelly\OAuth2\Server\ClientCredentialsAuthorizationServer;
+use Eelly\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
+use Eelly\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
+use Eelly\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
+use Eelly\OAuth2\Server\AuthorizationServer\RefreshTokenAuthorizationServer;
 use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
-use Eelly\OAuth2\Server\PasswordAuthorizationServer;
-use Eelly\OAuth2\Server\RefreshTokenAuthorizationServer;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
@@ -118,6 +119,9 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
                 break;
             case 'password':
                 $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey, new \Eelly\SDK\User\Api\User());
+                break;
+            case 'authorization_code':
+                $server = new AuthorizationCodeAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             case 'refresh_token':
                 $server = new RefreshTokenAuthorizationServer($this->privateKey, $this->encryptionKey);
