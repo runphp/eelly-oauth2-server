@@ -57,7 +57,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
      */
     public function revokeAccessToken($tokenId): void
     {
-        $accessTokenEntity = AccessTokenEntity::findFirst([['identifier'=>$tokenId]]);
+        $accessTokenEntity = AccessTokenEntity::findFirst([['identifier' => $tokenId]]);
         if (false !== $accessTokenEntity) {
             $accessTokenEntity->setRevoked(true);
             $accessTokenEntity->save();
@@ -71,7 +71,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
      */
     public function isAccessTokenRevoked($tokenId): bool
     {
-        $accessTokenEntity = AccessTokenEntity::findFirst([['identifier'=>$tokenId]]);
+        $accessTokenEntity = AccessTokenEntity::findFirst([['identifier' => $tokenId]]);
         $isAccessTokenRevoked = true;
         if (false !== $accessTokenEntity) {
             $isAccessTokenRevoked = $accessTokenEntity->isRevoked();
