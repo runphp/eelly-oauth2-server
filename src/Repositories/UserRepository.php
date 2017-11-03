@@ -50,4 +50,18 @@ class UserRepository implements UserRepositoryInterface
 
         return $entity;
     }
+
+    /**
+     * @param $uid
+     *
+     * @return UserEntity
+     */
+    public function getUserEntityByUid($uid)
+    {
+        $user = $this->user->getUser($uid);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
 }

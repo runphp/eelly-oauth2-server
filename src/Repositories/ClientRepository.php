@@ -43,4 +43,18 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $client;
     }
+
+    /**
+     * @param string $clientIdentifier
+     */
+    public function getClientEntityByClientIdentifier(string $clientIdentifier)
+    {
+        $client = ClientEntity::findFirstByClientKey($clientIdentifier);
+        // Check if client is registered
+        if (false === $client) {
+            return;
+        }
+
+        return $client;
+    }
 }
