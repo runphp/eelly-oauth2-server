@@ -62,6 +62,7 @@ class NoPasswordGrant extends PasswordGrant
 
         if ($client instanceof ClientEntityInterface === false) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::CLIENT_AUTHENTICATION_FAILED, $request));
+
             throw OAuthServerException::invalidClient();
         }
 
