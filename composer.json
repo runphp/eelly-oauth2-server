@@ -1,6 +1,6 @@
 {
-	"name": "eelly/oauth2-server",
-	"description": "eelly oauth2 server",
+	"name": "shadon/oauth2-server",
+	"description": "shadon oauth2 server",
 	"keywords": [
 		"oauth2",
 		"thephpleague"
@@ -9,8 +9,8 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Eelly",
-			"homepage": "https://www.eelly.com"
+			"name": "Shadon",
+			"homepage": "http://www.shadon.org"
 		}
 	],
 	"require": {
@@ -21,7 +21,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Eelly\\OAuth2\\Server\\": "src"
+			"Shadon\\OAuth2\\Server\\": "src"
 		}
 	}
 }

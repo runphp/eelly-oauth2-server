@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Entities;
+namespace Shadon\OAuth2\Server\Entities;
 
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Unserializable;
@@ -329,7 +329,7 @@ abstract class AbstractMongoEntity extends PhalconCollection implements Unserial
         /*
          * Execute the preSave hook
          */
-        if ($this->_preSave($this->_dependencyInjector, self::$_disableEvents, false) === false) {
+        if (false === $this->_preSave($this->_dependencyInjector, self::$_disableEvents, false)) {
             return false;
         }
 

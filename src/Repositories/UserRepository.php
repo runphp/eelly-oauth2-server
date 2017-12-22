@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Repositories;
+namespace Shadon\OAuth2\Server\Repositories;
 
-use Eelly\OAuth2\Server\Entities\UserEntity;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use Shadon\OAuth2\Server\Entities\UserEntity;
 
 /**
  * Class UserRepository.

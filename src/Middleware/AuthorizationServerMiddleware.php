@@ -11,14 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Middleware;
+namespace Shadon\OAuth2\Server\Middleware;
 
-use Shadon\Di\InjectionAwareInterface;
-use Eelly\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
-use Eelly\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
-use Eelly\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
-use Eelly\OAuth2\Server\AuthorizationServer\RefreshTokenAuthorizationServer;
-use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
@@ -26,6 +20,12 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 use Phalcon\DiInterface as Di;
 use Phalcon\Http\RequestInterface;
 use Phalcon\Http\ResponseInterface;
+use Shadon\Di\InjectionAwareInterface;
+use Shadon\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\RefreshTokenAuthorizationServer;
+use Shadon\OAuth2\Server\Middleware\Traits\ResponseTrait;
 
 /**
  * @author hehui<hehui@eelly.net>

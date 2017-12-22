@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server;
+namespace Shadon\OAuth2\Server;
 
-use Eelly\OAuth2\Server\Repositories\AccessTokenRepository;
 use League\OAuth2\Server\ResourceServer as LeagueResourceServer;
+use Shadon\OAuth2\Server\Repositories\AccessTokenRepository;
 
 class ResourceServer extends LeagueResourceServer
 {

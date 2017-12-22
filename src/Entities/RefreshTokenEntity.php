@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Entities;
+namespace Shadon\OAuth2\Server\Entities;
 
-use Eelly\OAuth2\Server\Entities\Traits\RevokedTrait;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
 use MongoDB\BSON\UTCDateTime;
+use Shadon\OAuth2\Server\Entities\Traits\RevokedTrait;
 
 class RefreshTokenEntity extends AbstractMongoEntity implements RefreshTokenEntityInterface
 {

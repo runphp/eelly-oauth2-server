@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Grant;
+namespace Shadon\OAuth2\Server\Grant;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
@@ -60,7 +60,7 @@ class NoPasswordGrant extends PasswordGrant
         //$clientSecret = $this->getRequestParameter('client_secret', $request, $basicAuthPassword);
         $client = $this->clientRepository->getClientEntityByClientIdentifier($clientId);
 
-        if ($client instanceof ClientEntityInterface === false) {
+        if (false === $client instanceof ClientEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::CLIENT_AUTHENTICATION_FAILED, $request));
 
             throw OAuthServerException::invalidClient();
@@ -76,7 +76,7 @@ class NoPasswordGrant extends PasswordGrant
             throw OAuthServerException::invalidRequest('uid');
         }
         $user = $this->userRepository->getUserEntityByUid($uid);
-        if ($user instanceof UserEntityInterface === false) {
+        if (false === $user instanceof UserEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
             throw OAuthServerException::invalidCredentials();

@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Repositories;
+namespace Shadon\OAuth2\Server\Repositories;
 
-use Eelly\OAuth2\Server\Entities\ScopeEntity;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
+use Shadon\OAuth2\Server\Entities\ScopeEntity;
 
 class ScopeRepository implements ScopeRepositoryInterface
 {
@@ -34,7 +34,7 @@ class ScopeRepository implements ScopeRepositoryInterface
                 'description' => 'Your email address',
             ],
         ];
-        if (array_key_exists($scopeIdentifier, $scopes) === false) {
+        if (false === array_key_exists($scopeIdentifier, $scopes)) {
             return;
         }
         $scope = new ScopeEntity();
@@ -50,7 +50,7 @@ class ScopeRepository implements ScopeRepositoryInterface
      */
     public function finalizeScopes(array $scopes, $grantType, ClientEntityInterface $clientEntity, $userIdentifier = null)
     {
-        if ((int) $userIdentifier === 1) {
+        if (1 === (int) $userIdentifier) {
             $scope = new ScopeEntity();
             $scope->setIdentifier('email');
             $scopes[] = $scope;

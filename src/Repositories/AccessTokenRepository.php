@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Repositories;
+namespace Shadon\OAuth2\Server\Repositories;
 
-use Eelly\OAuth2\Server\Entities\AccessTokenEntity;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
+use Shadon\OAuth2\Server\Entities\AccessTokenEntity;
 
 /**
  * @author hehui<hehui@eelly.net>

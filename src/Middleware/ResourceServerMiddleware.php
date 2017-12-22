@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Middleware;
+namespace Shadon\OAuth2\Server\Middleware;
 
-use Eelly\OAuth2\Server\Middleware\Traits\ResponseTrait;
-use Eelly\OAuth2\Server\ResourceServer;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Phalcon\Http\RequestInterface;
 use Phalcon\Http\ResponseInterface;
+use Shadon\OAuth2\Server\Middleware\Traits\ResponseTrait;
+use Shadon\OAuth2\Server\ResourceServer;
 
 class ResourceServerMiddleware
 {
