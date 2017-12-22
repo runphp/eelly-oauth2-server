@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\AuthorizationServer;
+namespace Shadon\OAuth2\Server\AuthorizationServer;
 
-use Eelly\OAuth2\Server\Repositories\AccessTokenRepository;
-use Eelly\OAuth2\Server\Repositories\AuthCodeRepository;
-use Eelly\OAuth2\Server\Repositories\ClientRepository;
-use Eelly\OAuth2\Server\Repositories\RefreshTokenRepository;
-use Eelly\OAuth2\Server\Repositories\ScopeRepository;
 use League\OAuth2\Server\AuthorizationServer as LeagueAuthorizationServer;
 use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
+use Shadon\OAuth2\Server\Repositories\AccessTokenRepository;
+use Shadon\OAuth2\Server\Repositories\AuthCodeRepository;
+use Shadon\OAuth2\Server\Repositories\ClientRepository;
+use Shadon\OAuth2\Server\Repositories\RefreshTokenRepository;
+use Shadon\OAuth2\Server\Repositories\ScopeRepository;
 
 /**
  * Class AuthorizationCodeAuthorizationServer.

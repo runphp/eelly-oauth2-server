@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Entities\Traits;
+namespace Shadon\OAuth2\Server\Entities\Traits;
 
 trait RevokedTrait
 {

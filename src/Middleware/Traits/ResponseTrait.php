@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Server\Middleware\Traits;
+namespace Shadon\OAuth2\Server\Middleware\Traits;
 
 use Phalcon\Http\ResponseInterface;
 
