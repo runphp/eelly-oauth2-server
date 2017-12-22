@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Eelly\OAuth2\Server\Middleware;
 
-use Eelly\Di\InjectionAwareInterface;
+use Shadon\Di\InjectionAwareInterface;
 use Eelly\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
 use Eelly\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
 use Eelly\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
