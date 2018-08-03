@@ -64,4 +64,13 @@ class UserRepository implements UserRepositoryInterface
 
         return $entity;
     }
+
+    public function getUserEntityByQQAccessToken($accessToken)
+    {
+        $user = $this->user->getUserByQQAccessToken($accessToken);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
 }
