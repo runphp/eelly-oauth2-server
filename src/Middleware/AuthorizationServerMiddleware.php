@@ -24,6 +24,7 @@ use Shadon\Di\InjectionAwareInterface;
 use Shadon\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\QQAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\RefreshTokenAuthorizationServer;
 use Shadon\OAuth2\Server\Middleware\Traits\ResponseTrait;
 
@@ -125,6 +126,9 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
                 break;
             case 'refresh_token':
                 $server = new RefreshTokenAuthorizationServer($this->privateKey, $this->encryptionKey);
+                break;
+            case 'qq':
+                $server = new QQAuthorizationServer($this->privateKey, $this->encryptionKey, new \Eelly\SDK\User\Api\User());
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();
