@@ -23,14 +23,14 @@ use Shadon\OAuth2\Server\Entities\UserEntity;
 class UserRepository implements UserRepositoryInterface
 {
     /**
-     * @var \Eelly\SDK\User\Api\User
+     * @var \Eelly\SDK\User\Api\OauthUser
      */
     private $user;
 
     /**
      * UserRepository constructor.
      */
-    public function __construct(\Eelly\SDK\User\Api\User $user)
+    public function __construct(\Eelly\SDK\User\Api\OauthUser $user)
     {
         $this->user = $user;
     }
@@ -68,6 +68,15 @@ class UserRepository implements UserRepositoryInterface
     public function getUserEntityByQQAccessToken($accessToken)
     {
         $user = $this->user->getUserByQQAccessToken($accessToken);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
+
+    public function getUserEntityByWechatCode($code)
+    {
+        $user = $this->user->getUserByWechatCode($code);
         $entity = new UserEntity();
         $entity->setIdentifier($user->uid);
 

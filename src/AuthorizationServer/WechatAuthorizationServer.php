@@ -15,7 +15,8 @@ namespace Shadon\OAuth2\Server\AuthorizationServer;
 
 use League\OAuth2\Server\AuthorizationServer as LeagueAuthorizationServer;
 use League\OAuth2\Server\CryptKey;
-use League\OAuth2\Server\Grant\PasswordGrant;
+use Shadon\OAuth2\Server\Grant\QQGrant;
+use Shadon\OAuth2\Server\Grant\WechatGrant;
 use Shadon\OAuth2\Server\Repositories\AccessTokenRepository;
 use Shadon\OAuth2\Server\Repositories\ClientRepository;
 use Shadon\OAuth2\Server\Repositories\RefreshTokenRepository;
@@ -23,9 +24,9 @@ use Shadon\OAuth2\Server\Repositories\ScopeRepository;
 use Shadon\OAuth2\Server\Repositories\UserRepository;
 
 /**
- * Class PasswordAuthorizationServer.
+ * Class WechatAuthorizationServer.
  */
-class PasswordAuthorizationServer extends LeagueAuthorizationServer
+class WechatAuthorizationServer extends LeagueAuthorizationServer
 {
     /**
      * PasswordAuthorizationServer constructor.
@@ -43,7 +44,7 @@ class PasswordAuthorizationServer extends LeagueAuthorizationServer
         $userRepository = new UserRepository($user); // instance of UserRepositoryInterface
         $refreshTokenRepository = new RefreshTokenRepository(); // instance of RefreshTokenRepositoryInterface
 
-        $grant = new PasswordGrant($userRepository, $refreshTokenRepository);
+        $grant = new WechatGrant($userRepository, $refreshTokenRepository);
         $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
         $this->enableGrantType($grant, new \DateInterval('PT1H'));
     }
