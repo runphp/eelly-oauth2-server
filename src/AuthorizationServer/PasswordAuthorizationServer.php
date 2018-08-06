@@ -30,8 +30,8 @@ class PasswordAuthorizationServer extends LeagueAuthorizationServer
     /**
      * PasswordAuthorizationServer constructor.
      *
-     * @param CryptKey                 $privateKey
-     * @param string                   $encryptionKey
+     * @param CryptKey                      $privateKey
+     * @param string                        $encryptionKey
      * @param \Eelly\SDK\User\Api\OauthUser $user
      */
     public function __construct(CryptKey $privateKey, string $encryptionKey, \Eelly\SDK\User\Api\OauthUser $user)
