@@ -58,7 +58,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getUserEntityByUid($uid)
     {
-        $user = $this->user->getUser($uid);
+        $user = $this->user->getUserByUid($uid);
         $entity = new UserEntity();
         $entity->setIdentifier($user->uid);
 
