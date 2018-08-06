@@ -15,7 +15,6 @@ namespace Shadon\OAuth2\Server\AuthorizationServer;
 
 use League\OAuth2\Server\AuthorizationServer as LeagueAuthorizationServer;
 use League\OAuth2\Server\CryptKey;
-use Shadon\OAuth2\Server\Grant\QQGrant;
 use Shadon\OAuth2\Server\Grant\WechatGrant;
 use Shadon\OAuth2\Server\Repositories\AccessTokenRepository;
 use Shadon\OAuth2\Server\Repositories\ClientRepository;
@@ -31,8 +30,8 @@ class WechatAuthorizationServer extends LeagueAuthorizationServer
     /**
      * PasswordAuthorizationServer constructor.
      *
-     * @param CryptKey                 $privateKey
-     * @param string                   $encryptionKey
+     * @param CryptKey                      $privateKey
+     * @param string                        $encryptionKey
      * @param \Eelly\SDK\User\Api\OauthUser $user
      */
     public function __construct(CryptKey $privateKey, string $encryptionKey, \Eelly\SDK\User\Api\OauthUser $user)
