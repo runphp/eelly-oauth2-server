@@ -68,12 +68,12 @@ class WechatGrant extends PasswordGrant
      */
     protected function validateUser(ServerRequestInterface $request, ClientEntityInterface $client)
     {
-        $accessToken = $this->getRequestParameter('code', $request);
-        if (null === $accessToken) {
+        $code = $this->getRequestParameter('code', $request);
+        if (null === $code) {
             throw OAuthServerException::invalidRequest('code');
         }
 
-        $user = $this->userRepository->getUserEntityByWechatCode($accessToken);
+        $user = $this->userRepository->getUserEntityByWechatCode($client->getIdentifier(), $code);
         if (false === $user instanceof UserEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
