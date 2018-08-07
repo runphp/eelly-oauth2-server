@@ -73,7 +73,7 @@ class WechatGrant extends PasswordGrant
             throw OAuthServerException::invalidRequest('code');
         }
 
-        $user = $this->userRepository->getUserEntityByQQAccessToken($accessToken);
+        $user = $this->userRepository->getUserEntityByWechatCode($accessToken);
         if (false === $user instanceof UserEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
