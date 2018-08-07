@@ -82,4 +82,13 @@ class UserRepository implements UserRepositoryInterface
 
         return $entity;
     }
+
+    public function getUserEntityByMobileCode($mobile, $code)
+    {
+        $user = $this->user->getUserByMobileCode($mobile, $code);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
 }
