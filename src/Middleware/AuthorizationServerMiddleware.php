@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Shadon\OAuth2\Server\Middleware;
 
+use Eelly\SDK\User\Api\OauthUser;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use League\OAuth2\Server\CryptKey;
@@ -23,9 +24,11 @@ use Phalcon\Http\ResponseInterface;
 use Shadon\Di\InjectionAwareInterface;
 use Shadon\OAuth2\Server\AuthorizationServer\AuthorizationCodeAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\ClientCredentialsAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\MobileAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\PasswordAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\QQAuthorizationServer;
 use Shadon\OAuth2\Server\AuthorizationServer\RefreshTokenAuthorizationServer;
+use Shadon\OAuth2\Server\AuthorizationServer\WechatAuthorizationServer;
 use Shadon\OAuth2\Server\Middleware\Traits\ResponseTrait;
 
 /**
@@ -119,7 +122,7 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
                 $server = new ClientCredentialsAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             case 'password':
-                $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey, new \Eelly\SDK\User\Api\User());
+                $server = new PasswordAuthorizationServer($this->privateKey, $this->encryptionKey, new OauthUser());
                 break;
             case 'authorization_code':
                 $server = new AuthorizationCodeAuthorizationServer($this->privateKey, $this->encryptionKey);
@@ -128,7 +131,13 @@ class AuthorizationServerMiddleware implements InjectionAwareInterface
                 $server = new RefreshTokenAuthorizationServer($this->privateKey, $this->encryptionKey);
                 break;
             case 'qq':
-                $server = new QQAuthorizationServer($this->privateKey, $this->encryptionKey, new \Eelly\SDK\User\Api\User());
+                $server = new QQAuthorizationServer($this->privateKey, $this->encryptionKey, new OauthUser());
+                break;
+            case 'wechat':
+                $server = new WechatAuthorizationServer($this->privateKey, $this->encryptionKey, new OauthUser());
+                break;
+            case 'mobile':
+                $server = new MobileAuthorizationServer($this->privateKey, $this->encryptionKey, new OauthUser());
                 break;
             default:
                 throw OAuthServerException::unsupportedGrantType();

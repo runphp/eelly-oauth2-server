@@ -15,7 +15,7 @@ namespace Shadon\OAuth2\Server\AuthorizationServer;
 
 use League\OAuth2\Server\AuthorizationServer as LeagueAuthorizationServer;
 use League\OAuth2\Server\CryptKey;
-use League\OAuth2\Server\Grant\PasswordGrant;
+use Shadon\OAuth2\Server\Grant\MobileGrant;
 use Shadon\OAuth2\Server\Repositories\AccessTokenRepository;
 use Shadon\OAuth2\Server\Repositories\ClientRepository;
 use Shadon\OAuth2\Server\Repositories\RefreshTokenRepository;
@@ -23,9 +23,9 @@ use Shadon\OAuth2\Server\Repositories\ScopeRepository;
 use Shadon\OAuth2\Server\Repositories\UserRepository;
 
 /**
- * Class PasswordAuthorizationServer.
+ * Class MobileAuthorizationServer.
  */
-class PasswordAuthorizationServer extends LeagueAuthorizationServer
+class MobileAuthorizationServer extends LeagueAuthorizationServer
 {
     /**
      * PasswordAuthorizationServer constructor.
@@ -43,7 +43,7 @@ class PasswordAuthorizationServer extends LeagueAuthorizationServer
         $userRepository = new UserRepository($user); // instance of UserRepositoryInterface
         $refreshTokenRepository = new RefreshTokenRepository(); // instance of RefreshTokenRepositoryInterface
 
-        $grant = new PasswordGrant($userRepository, $refreshTokenRepository);
+        $grant = new MobileGrant($userRepository, $refreshTokenRepository);
         $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
         $this->enableGrantType($grant, new \DateInterval('PT1H'));
     }
