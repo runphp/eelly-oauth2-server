@@ -21,7 +21,7 @@ use League\OAuth2\Server\RequestEvent;
 use League\OAuth2\Server\ResponseTypes\ResponseTypeInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class WechatGrant extends PasswordGrant
+class MobileGrant extends PasswordGrant
 {
     /**
      * {@inheritdoc}
@@ -55,7 +55,7 @@ class WechatGrant extends PasswordGrant
      */
     public function getIdentifier()
     {
-        return 'wechat';
+        return 'mobile';
     }
 
     /**
@@ -68,12 +68,17 @@ class WechatGrant extends PasswordGrant
      */
     protected function validateUser(ServerRequestInterface $request, ClientEntityInterface $client)
     {
+        $username = $this->getRequestParameter('username', $request);
+        if (null === $username) {
+            throw OAuthServerException::invalidRequest('username');
+        }
+
         $code = $this->getRequestParameter('code', $request);
         if (null === $code) {
             throw OAuthServerException::invalidRequest('code');
         }
 
-        $user = $this->userRepository->getUserEntityByWechatCode($client->getIdentifier(), $code);
+        $user = $this->userRepository->getUserEntityByMobileCode($username, $code);
         if (false === $user instanceof UserEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
