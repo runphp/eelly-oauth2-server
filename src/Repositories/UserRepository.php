@@ -30,7 +30,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * UserRepository constructor.
      */
-    public function __construct(\Eelly\SDK\User\Api\OauthUser $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
@@ -74,9 +74,18 @@ class UserRepository implements UserRepositoryInterface
         return $entity;
     }
 
-    public function getUserEntityByWechatCode($code)
+    public function getUserEntityByWechatCode($clientId, $code)
     {
-        $user = $this->user->getUserByWechatCode($code);
+        $user = $this->user->getUserByWechatCode($clientId, $code);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
+
+    public function getUserEntityByMobileCode($mobile, $code)
+    {
+        $user = $this->user->getUserByMobileCode($mobile, $code);
         $entity = new UserEntity();
         $entity->setIdentifier($user->uid);
 
