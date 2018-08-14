@@ -30,7 +30,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * UserRepository constructor.
      */
-    public function __construct(\Eelly\SDK\User\Api\OauthUser $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
