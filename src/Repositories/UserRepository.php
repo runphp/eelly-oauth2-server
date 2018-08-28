@@ -83,6 +83,21 @@ class UserRepository implements UserRepositoryInterface
         return $entity;
     }
 
+    public function getUserEntityByWechatJscode(
+        string $clientId,
+        string $code,
+        string $encryptedData,
+        string $iv,
+        string $rawData,
+        string $signature)
+    {
+        $user = $this->user->getUserByWechatJscode($clientId, $code, $encryptedData, $iv, $rawData, $signature);
+        $entity = new UserEntity();
+        $entity->setIdentifier($user->uid);
+
+        return $entity;
+    }
+
     public function getUserEntityByMobileCode($mobile, $code)
     {
         $user = $this->user->getUserByMobileCode($mobile, $code);

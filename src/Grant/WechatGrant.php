@@ -72,8 +72,19 @@ class WechatGrant extends PasswordGrant
         if (null === $code) {
             throw OAuthServerException::invalidRequest('code');
         }
-
-        $user = $this->userRepository->getUserEntityByWechatCode($client->getIdentifier(), $code);
+        $parameters = $this->validateParameters(['encryptedData', 'iv', 'rawData', 'signature'], $request);
+        if (empty($parameters)) {
+            $user = $this->userRepository->getUserEntityByWechatCode($client->getIdentifier(), $code);
+        } else {
+            $user = $this->userRepository->getUserEntityByWechatJscode(
+                $client->getIdentifier(),
+                $code,
+                $parameters['encryptedData'],
+                $parameters['iv'],
+                $parameters['rawData'],
+                $parameters['signature']
+            );
+        }
         if (false === $user instanceof UserEntityInterface) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
@@ -81,5 +92,32 @@ class WechatGrant extends PasswordGrant
         }
 
         return $user;
+    }
+
+    /**
+     * @param array                  $parameters
+     * @param ServerRequestInterface $request
+     *
+     * @return bool
+     */
+    private function validateParameters(array $parameters, ServerRequestInterface $request)
+    {
+        $return = [];
+        $prev = $this->getRequestParameter($parameters[0], $request);
+        foreach ($parameters as $key => $parameter) {
+            $value = $this->getRequestParameter($parameter, $request);
+            if (null != $prev && null === $value) {
+                throw OAuthServerException::invalidRequest($parameter);
+            }
+            if (null != $value) {
+                if (null === $prev) {
+                    throw OAuthServerException::invalidRequest($parameters[$key - 1]);
+                }
+                $return[$parameter] = $value;
+            }
+            $prev = $value;
+        }
+
+        return $return;
     }
 }
