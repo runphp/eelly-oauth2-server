@@ -45,6 +45,6 @@ class MobileAuthorizationServer extends LeagueAuthorizationServer
 
         $grant = new MobileGrant($userRepository, $refreshTokenRepository);
         $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
-        $this->enableGrantType($grant, new \DateInterval('PT1H'));
+        $this->enableGrantType($grant, new \DateInterval('P7D'));
     }
 }

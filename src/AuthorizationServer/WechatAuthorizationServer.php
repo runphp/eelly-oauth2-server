@@ -45,6 +45,6 @@ class WechatAuthorizationServer extends LeagueAuthorizationServer
 
         $grant = new WechatGrant($userRepository, $refreshTokenRepository);
         $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
-        $this->enableGrantType($grant, new \DateInterval('PT1H'));
+        $this->enableGrantType($grant, new \DateInterval('P7D'));
     }
 }

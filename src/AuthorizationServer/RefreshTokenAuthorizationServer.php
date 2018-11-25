@@ -41,7 +41,7 @@ class RefreshTokenAuthorizationServer extends LeagueAuthorizationServer
         $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
         $this->enableGrantType(
             $grant,
-            new \DateInterval('PT1H') // new access tokens will expire after an hour
+            new \DateInterval('P7D') // new access tokens will expire after an hour
         );
     }
 }
